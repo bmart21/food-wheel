@@ -4,7 +4,24 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 const rootElement = document.getElementById('root')
-  
+
+class Title extends React.Component {
+  render() {
+    return (
+        <p>Hello there!</p>
+    );
+  }
+}
+
+class Intro extends React.Component {
+  render() {
+    return (
+        <p>welcome there friend</p>
+    );
+  }
+}
+
+
 function RepeatButton(props) {
   return (
     <button 
@@ -32,6 +49,8 @@ class App extends React.Component {
 
     return (
       <div>
+        <Title />
+        <Intro />
         <div className={`spinner-container`}>
           <Spinner  ref={(child) => { this._child1 = child; }} timer="1000" />
           <div className="gradient-fade"></div>
