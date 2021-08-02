@@ -23,8 +23,6 @@ class App extends React.Component {
 
   handleClick() { 
     this._child1.forceUpdateHandler();
-    this._child2.forceUpdateHandler();
-    this._child3.forceUpdateHandler();
   }
 
 
@@ -36,8 +34,6 @@ class App extends React.Component {
       <div>
         <div className={`spinner-container`}>
           <Spinner  ref={(child) => { this._child1 = child; }} timer="1000" />
-          <Spinner  ref={(child) => { this._child2 = child; }} timer="1400" />
-          <Spinner  ref={(child) => { this._child3 = child; }} timer="2200" />
           <div className="gradient-fade"></div>
         </div>
         {repeatButton}          
