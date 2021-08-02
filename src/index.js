@@ -21,6 +21,27 @@ class Intro extends React.Component {
   }
 }
 
+class LocationForm extends React.Component {
+  render() {
+    return (
+      <form>
+        <label>
+          Location:
+         <input type="text" name="location" />
+        </label>
+        <label>
+          Distance:
+          <select id="distance" name="distance">
+            <option value="10mi">10 mi</option>
+            <option value="20mi">20 mi</option>
+            <option value="30mi">30 mi</option>
+          </select>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
 
 function RepeatButton(props) {
   return (
@@ -51,6 +72,7 @@ class App extends React.Component {
       <div>
         <Title />
         <Intro />
+        <LocationForm />
         <div className={`spinner-container`}>
           <Spinner  ref={(child) => { this._child1 = child; }} timer="1000" />
           <div className="gradient-fade"></div>
