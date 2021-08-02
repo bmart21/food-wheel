@@ -21,36 +21,56 @@ class Intro extends React.Component {
   }
 }
 
-function LocationForm(props) {
-  return (
-    <div>
+class Location extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: '',
+      distance: '10mi'
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    return (
+      <form>
         <label>
           Location:
-          <input type="text" />
+          <input
+            name="location"
+            type="text"
+            value={this.state.value}
+            onChange={this.handleInputChange} />
         </label>
+        <br />
         <label>
-          Distance:
-          <select>
+          Distance
+          <select 
+            name="distance"
+            value={this.state.value} 
+            onChange={this.handleInputChange}>
             <option value="10mi">10mi</option>
             <option value="15mi">15mi</option>
             <option value="20mi">20mi</option>
           </select>
         </label>
-        <button onClick={props.onClick}>
+        <button onClick={this.props.onClick}>
           Submit
         </button>
-      </div>
-  );
-}
-
-function RepeatButton(props) {
-  return (
-    <button 
-      aria-label='Play again.' 
-      id='repeatButton' 
-      onClick={props.onClick}>
-    </button>
-  );
+      </form>
+    );
+  }
 }
 
 class App extends React.Component {
@@ -65,22 +85,17 @@ class App extends React.Component {
 
 
   render() {
-    let repeatButton = null
-    repeatButton = <RepeatButton onClick={this.handleClick} />
 
-    let locationForm = null
-    locationForm = <LocationForm onClick={this.handleClick} />
 
     return (
       <div>
         <Title />
         <Intro />
-        {locationForm}
         <div className={`spinner-container`}>
           <Spinner  ref={(child) => { this._child1 = child; }} timer="1000" />
           <div className="gradient-fade"></div>
         </div>
-        {repeatButton}          
+        <Location onClick={this.handleClick}/>
       </div>
     );
   }
