@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Alert from 'react-bootstrap/Alert';
 
 const rootElement = document.getElementById('root')
 
@@ -21,9 +22,11 @@ class Intro extends React.Component {
   }
 }
 
-class Location extends React.Component {
+
+class App extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       location: '',
       distance: '10mi'
@@ -40,11 +43,23 @@ class Location extends React.Component {
     this.setState({
       [name]: value
     });
+  }  
+
+  handleClick() { 
+    this._child1.forceUpdateHandler();
   }
+
 
   render() {
     return (
-      <form>
+      <div>
+        <Title />
+        <Intro />
+        <div className={`spinner-container`}>
+          <Spinner  ref={(child) => { this._child1 = child; }} timer="1000" />
+          <div className="gradient-fade"></div>
+        </div>
+        <form>
         <label>
           Location:
           <input
@@ -56,46 +71,20 @@ class Location extends React.Component {
         <br />
         <label>
           Distance
-          <select 
+          <select
             name="distance"
-            value={this.state.value} 
+            value={this.state.value}
             onChange={this.handleInputChange}>
             <option value="10mi">10mi</option>
             <option value="15mi">15mi</option>
             <option value="20mi">20mi</option>
           </select>
         </label>
-        <button onClick={this.props.onClick}>
+        <button onClick={this.handleClick}>
           Submit
         </button>
       </form>
-    );
-  }
-}
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }  
-
-  handleClick() { 
-    this._child1.forceUpdateHandler();
-  }
-
-
-  render() {
-
-
-    return (
-      <div>
-        <Title />
-        <Intro />
-        <div className={`spinner-container`}>
-          <Spinner  ref={(child) => { this._child1 = child; }} timer="1000" />
-          <div className="gradient-fade"></div>
-        </div>
-        <Location onClick={this.handleClick}/>
+        <p>{this.state.distance}</p>
       </div>
     );
   }
